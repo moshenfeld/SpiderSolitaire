@@ -16,18 +16,18 @@ import exceptions.IllegalMoveException;
 
 public class MemoryRoutePlayer extends Player{
 	
-	GenericSearch search;
-	MemoryOutput outputSearch;
-	SimpleStop stopCond;
-	DFS pathes;
-	Evaluator evaluator1; // TODO: change...after moshe commit.
-	Evaluator evaluator2; // TODO: change...after moshe commit.
+	private GenericSearch search;
+	private MemoryOutput outputSearch;
+	private SimpleStop stopCond;
+	private DFS pathes;
+	private int depth;
+	private Evaluator evaluator; // TODO: change...after moshe commit.
 
-	public MemoryRoutePlayer(Board board) {
+	public MemoryRoutePlayer(Board board,int depth) {
 		super(board);
-		
+		this.depth = depth;
 		outputSearch = new MemoryOutput();
-		stopCond = new SimpleStop();
+		stopCond = new SimpleStop(depth);
 		pathes = new DFS();
 		
 		//TODO: change when evaluator turn into an interface.
@@ -41,46 +41,22 @@ public class MemoryRoutePlayer extends Player{
 		double numOfInSequenceCards = 3;
 		double numOfInSequenceCardsShapeUnSensetive = 1;
 		double maxNumOfInSequenceCards = 0;
-		double[] weights1 = {numOfDistributions,numOfPosiableMoves,	numOfRemovableCards, numOfVisibleCards,
+		double[] weights = {numOfDistributions,numOfPosiableMoves,	numOfRemovableCards, numOfVisibleCards,
 				numOfEmptyPiles ,numOfCardsOnBoard ,stateGameGrade, numOfInSequenceCards, numOfInSequenceCardsShapeUnSensetive, maxNumOfInSequenceCards};
 		
-		numOfDistributions = 2;
-		numOfPosiableMoves = 0;
-		numOfRemovableCards = 0;
-		numOfVisibleCards = 1;
-		numOfEmptyPiles = 0;
-		numOfCardsOnBoard = 0;
-		stateGameGrade = 0;
-		numOfInSequenceCards = 1;
-		numOfInSequenceCardsShapeUnSensetive = 0;
-		maxNumOfInSequenceCards = 0;
-		double[] weights2 = {numOfDistributions,numOfPosiableMoves,	numOfRemovableCards, numOfVisibleCards,
-				numOfEmptyPiles ,numOfCardsOnBoard ,stateGameGrade, numOfInSequenceCards, numOfInSequenceCardsShapeUnSensetive, maxNumOfInSequenceCards};
-		
-		evaluator1 = null;
-		evaluator2 = null;
+		evaluator = null;
 		try {
-			evaluator1 = new Evaluator(new AttributeWeigths(weights1));
-			evaluator2 = new Evaluator(new AttributeWeigths(weights2));
+			evaluator = new Evaluator(new AttributeWeigths(weights));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		search = new GenericSearch(pathes, stopCond, outputSearch, evaluator1);
+		search = new GenericSearch(pathes, stopCond, outputSearch, evaluator);
 	}
 
 	@Override
 	public Move getNextMove(List<Move> legalMoves) throws IllegalMoveException {
-		if(Math.random() > 0)
-		{
-			search.setEvaluator(evaluator1);
-		}
-		else
-		{
-			search.setEvaluator(evaluator2);
-		}
-		
 		Move bestMove = null;
 		if(outputSearch.isMemoryMove()){
 			bestMove = outputSearch.getMemoryMove();
