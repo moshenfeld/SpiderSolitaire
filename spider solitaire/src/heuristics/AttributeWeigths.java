@@ -6,8 +6,8 @@ public class AttributeWeigths {
 		numOfDistributions,numOfPosiableMoves,	numOfRemovableCards, numOfVisibleCards,
 		numOfEmptyPiles ,numOfCardsOnBoard ,stateGameGrade, numOfInSequenceCards, numOfInSequenceCardsShapeUnSensetive, maxNumOfInSequenceCards 
 		}
-	public static final double[] minValues = {-100 ,0, 0, 0, 0, 0, -100, -100, -100,-100};
-	public static final double[] maxValues = {100,0, 0, 0, 0, 0, 100, 100, 100,100};
+	public static final double[] minValues = {-100 ,-100, -100, -100, -100, -100, -100, -100, -100,-100};
+	public static final double[] maxValues = {100, 100, 100, 100, 100, 100, 100, 100, 100, 100};
 	
 //	public static final double[] minValues = {-100, -100, -100, -100, -100, -100, -100, -100,-100};
 //	public static final double[] maxValues = {100, 100, 100, 100, 100, 100, 100, 100,100};

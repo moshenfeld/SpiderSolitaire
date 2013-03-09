@@ -41,6 +41,14 @@ public class Card  implements Cloneable{
 		return true;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + this.number.ordinal();
+		return result;
+	}
+	
 	public String toString(){
 		return "(" + type + ", " + number + ", " + isVisible + ")";
 	}

@@ -6,9 +6,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import exceptions.IllegalMoveException;
 import player.DeepAIPlayer;
+import player.MemoryRoutePlayer;
 import player.NaiveAIPlayer;
 import player.Player;
 import player.RandomPlayer;
+import player.SimeplePlayer;
 import player.UserPlayer;
 import logic.Board;
 
@@ -27,7 +29,10 @@ public class Main {
 		//player = runRandomPlayer(board);
 		//player = runNaiveAIPlayer(board);
 		//player = runUserPlayer(board);
-		player = runDeepAIPlayer(board);
+		//player = runDeepAIPlayer(board);
+		//player = runSimplePlayer(board);
+		player = runMemoryPlayer(board);
+		
 		engine = new GameManager(board, player, window, true, true);
 		new Thread(engine).start();
 	}
@@ -63,6 +68,18 @@ public class Main {
 	private static Player runUserPlayer(Board board) throws IllegalMoveException{
 		board.startGame();
 		return new UserPlayer(board);	
+	}
+	
+	private static Player runSimplePlayer(Board board) throws IllegalMoveException
+	{
+		board.startGame();
+		return new SimeplePlayer(board);
+	}
+	
+	private static Player runMemoryPlayer(Board board) throws IllegalMoveException
+	{
+		board.startGame();
+		return new MemoryRoutePlayer(board);
 	}
 	
 	public static class KeyHandler extends KeyAdapter {

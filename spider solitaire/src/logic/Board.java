@@ -5,12 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+
+import logger.Log;
 import exceptions.IllegalMoveException;
 
 public class Board  implements Cloneable{
 
-	public static final int numOfPiles = 10;
-	public static final int numOfRounds = 1;
+	public static final int numOfPiles = 8;
+	public static final int numOfRounds = 2;
 	public static final int numOfDecks = 4;
 	private CardsPile[] cardPiles;
 	private Card[][] extraCards;
@@ -235,6 +237,11 @@ public class Board  implements Cloneable{
 	public int getNumOfCardsOnBoard() {
 		return (numOfDecks * Card.Type.values().length - numOfFinishedSeries) * Card.Number.values().length;
 	}
+	
+	public boolean isGameOver()
+	{
+		return getNumOfCardsOnBoard() == 0;
+	}
 
 	/**
 	 * return the last move.
@@ -279,7 +286,7 @@ public class Board  implements Cloneable{
 	public String toString(){
 		String output = "piles: \n";
 		for (int i = 0; i < cardPiles.length; i++) {
-			output += cardPiles[i] + "\n";
+			output += i+": "+cardPiles[i] + ": "+cardPiles[i].findNumOfRemovableCards()+", "+cardPiles[i].findNumOfRemovableCardsShapeUnSensetive()+"\n";
 		}
 		output += "extra cards (" + numOfDistributions + " distributions):\n";
 		for (int i = 0; i < numOfRounds; i++) {
@@ -340,16 +347,23 @@ public class Board  implements Cloneable{
 
 	@Override
 	public int hashCode() {
+		
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Arrays.hashCode(cardPiles);
-		result = prime * result + Arrays.hashCode(extraCards);
+		result = prime * result + Arrays.deepHashCode(cardPiles);
+		result = prime * result + Arrays.deepHashCode(extraCards);
+		
+		
 		result = prime * result + ((moves == null) ? 0 : moves.hashCode());
+		
+		
 		result = prime * result + numOfDistributions;
 		result = prime * result + numOfFinishedSeries;
 		result = prime * result + numOfMoves;
 		result = prime * result + numOfVisibleCards;
+		
 		result = prime * result + ((series == null) ? 0 : series.hashCode());
+		
 		return result;
 	}
 
@@ -359,10 +373,10 @@ public class Board  implements Cloneable{
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if ( !(obj instanceof Board) )
 			return false;
 		Board other = (Board) obj;
-		if (!Arrays.equals(cardPiles, other.cardPiles))
+		if (!Arrays.deepEquals(cardPiles, other.cardPiles))
 			return false;
 		if (!Arrays.deepEquals(extraCards, other.extraCards))
 			return false;

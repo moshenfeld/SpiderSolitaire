@@ -2,6 +2,7 @@ package player;
 
 import heuristics.Evaluator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,9 +14,14 @@ import exceptions.IllegalMoveException;
 
 public class DeepAIPlayer  extends EvaluationAIPlayer{
 
+ 
+	
 	private int depthDegree;
+	
 	private Board tempBoard;
 	private final Move undo = new Move(0,0,-1);
+
+
 
 
 	private class MovesAndScore{
@@ -39,10 +45,7 @@ public class DeepAIPlayer  extends EvaluationAIPlayer{
 	@Override
 	public Move getNextMove(List<Move> legalMoves) throws IllegalMoveException {
 		tempBoard = board.clone();
-		ScoreAndMove bestScoreAndMove = getNextDeepMove(this.depthDegree);
-		//ScoreAndMove bestScoreAndMove = getNextDeepMove(this.depthDegree,board.clone());
-		
-		//System.out.println("final move: "+bestScoreAndMove.move);
+		ScoreAndMove bestScoreAndMove = getNextDeepMove(this.depthDegree);	
 		if(bestScoreAndMove.move != null)
 		{
 			board.move(bestScoreAndMove.move, true);
@@ -50,7 +53,7 @@ public class DeepAIPlayer  extends EvaluationAIPlayer{
 		return bestScoreAndMove.move;
 	}
 
-	private class ScoreAndMove{
+	private class ScoreAndMove implements Comparable<ScoreAndMove>{
 
 		public double score;
 		public Move move;
@@ -59,52 +62,21 @@ public class DeepAIPlayer  extends EvaluationAIPlayer{
 			this.score = score;
 			this.move = move;
 		}
+
+		@Override
+		public int compareTo(ScoreAndMove other) {
+			return (int) (other.score - this.score);
+		}
+		
+		
 	}
-
-
-
-//	private ScoreAndMove getNextDeepMove(int depth,Board tempBoard) throws IllegalMoveException
-//	{
-//		depth--;
-//		if(tempBoard.getNumOfCardsOnBoard() == 0)
-//		{
-//			return new ScoreAndMove((evaluator.getValue(tempBoard) * (depth+2)),null);			
-//		}
-//		if(depth < 0)
-//		{
-//			return new ScoreAndMove(evaluator.getValue(tempBoard),null);
-//		}
-//		List<Move> legalMoves = tempBoard.getLegalMoves();
-//		ScoreAndMove tempScoreAndMove, bestScoreAndMove = new ScoreAndMove(Double.NEGATIVE_INFINITY,null);
-//		int emptyDestinations = 0;
-//		for (Move move : legalMoves) {
-//			//				boolean isEmptyDest = checkIsEmptyDestination(tempBoard,move);
-//			//				if(isEmptyDest)
-//			//				{
-//			//					emptyDestinations++;
-//			//				}
-//			//				if(!(isEmptyDest && emptyDestinations > 1)){
-//			Board roundBoard = tempBoard.clone();
-//			tempBoard.move(move, false);
-//			tempScoreAndMove = getNextDeepMove(depth,tempBoard.clone());
-//			tempScoreAndMove.score +=evaluator.getValue(tempBoard);
-//			tempBoard = roundBoard.clone();
-//			if(tempScoreAndMove.score > bestScoreAndMove.score )
-//			{
-//				bestScoreAndMove = new ScoreAndMove(tempScoreAndMove.score,move);
-//			}
-//			//				}
-//
-//		}
-//		return bestScoreAndMove;
-//	}
-
 	
 		private ScoreAndMove getNextDeepMove(int depth) throws IllegalMoveException
 		{
 			depth--;
-			if(tempBoard.getNumOfCardsOnBoard() == 0)
+			if(tempBoard.isGameOver())
 			{
+				System.out.println("out");
 				return new ScoreAndMove((evaluator.getValue(tempBoard) * (depth+2)),null);			
 			}
 			if(depth < 0)

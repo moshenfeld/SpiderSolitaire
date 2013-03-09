@@ -12,6 +12,9 @@ public class Evaluator{
 		this.attributesWeigths = attributesWeigths;
 	}
 	
+	public double evaluate(Board board) throws IllegalMoveException{
+		return getValue(board);
+	}
 	
 	public double getValue(Board board) throws IllegalMoveException {
 		StateAttributes analyzer = StateAttributes.calculateState(board);
