@@ -30,7 +30,7 @@ public class SimeplePlayer extends Player{
 		super(board);
 		
 		outputSearch = new SimpleOutput();
-		stopCond = new SimpleStop();
+		stopCond = new SimpleStop(1);
 		pathes = new BFS();
 		
 		//TODO: change when evaluator turn into an interface.
