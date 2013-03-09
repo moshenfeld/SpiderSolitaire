@@ -1,6 +1,8 @@
-package search;
+package search.output;
 
 import java.util.List;
+
+import search.Node;
 
 import logger.Log;
 import logic.Move;

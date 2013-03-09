@@ -1,6 +1,8 @@
-package player;
+package player.factories;
 
 import java.util.Map;
+
+import player.players.ApproximationAIPlayer;
 
 import game.MainParameters;
 import heuristics.StateAttributes;

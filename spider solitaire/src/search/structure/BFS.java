@@ -1,7 +1,9 @@
-package search;
+package search.structure;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import search.Node;
 
 public class BFS implements SearchStructureInf{
 

@@ -2,10 +2,11 @@ package AITools;
 
 import java.util.Arrays;
 
-import player.EvaluationAIFactory;
-import player.NaiveAIFactory;
+import player.factories.EvaluationAIFactory;
+import player.factories.NaiveAIFactory;
 import game.EvaluatorGameManager;
 import heuristics.AttributeWeigths;
+import heuristics.StateAttributes;
 
 public class HillClimbing {
 	
@@ -26,7 +27,7 @@ public class HillClimbing {
 	}
 
 	private static double[] pickState() {
-		double[] minValues = AttributeWeigths.minValues, maxValues = AttributeWeigths.maxValues;
+		double[] minValues = StateAttributes.MIN_VALUES, maxValues = StateAttributes.MAX_VALUES;
 		double[] state = new double[minValues.length];
 		for (int i = 0; i < state.length; i++) {
 			state[i] = minValues[i] + Math.random() * (maxValues[i] - minValues[i]);
@@ -68,7 +69,7 @@ public class HillClimbing {
 	}
 
 	private static double[] mutate(double[] oldState, double temprature) {
-		double[] minValues = AttributeWeigths.minValues, maxValues = AttributeWeigths.maxValues;
+		double[] minValues = StateAttributes.MIN_VALUES, maxValues = StateAttributes.MAX_VALUES;
 		double[] intervals = new double[minValues.length];
 		for (int i = 0; i < intervals.length; i++) {
 			intervals[i] = (maxValues[i] - minValues[i]) / 100;

@@ -1,5 +1,6 @@
-package player;
+package player.players;
 
+import player.abstructPlayers.EvaluationAIPlayer;
 import heuristics.Evaluator;
 import exceptions.IllegalMoveException;
 import logic.Board;
@@ -57,7 +58,7 @@ public class NaiveAIPlayer extends EvaluationAIPlayer{
 
 	@Override
 	protected double evaluateState(Board board) throws IllegalMoveException {
-		return evaluator.getValue(board);
+		return evaluator.evaluate(board);
 	}
 
 	@Override

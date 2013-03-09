@@ -1,7 +1,9 @@
-package player;
+package player.players;
 
 import heuristics.StateAttributes;
 import java.util.Map;
+
+import player.abstructPlayers.AIPlayer;
 import logic.Board;
 import logic.Card;
 import logic.Move;
@@ -56,7 +58,7 @@ public class ApproximationAIPlayer extends AIPlayer {
 
 	@Override
 	protected double evaluateState(Board board) throws IllegalMoveException {
-		Double temp = approximations.get(StateAttributes.calculateState(board));
+		Double temp = approximations.get(StateAttributes.extendedStateCalculation(board));
 		return (temp == null)? 0: temp;
 	}
 

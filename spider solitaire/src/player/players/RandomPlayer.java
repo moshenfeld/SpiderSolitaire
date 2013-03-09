@@ -1,7 +1,9 @@
-package player;
+package player.players;
 
 import java.util.Collections;
 import java.util.List;
+
+import player.abstructPlayers.Player;
 
 import exceptions.IllegalMoveException;
 

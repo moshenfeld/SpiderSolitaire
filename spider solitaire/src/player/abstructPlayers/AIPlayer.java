@@ -1,7 +1,8 @@
-package player;
+package player.abstructPlayers;
 
 import java.util.Collections;
 import java.util.List;
+
 
 import exceptions.IllegalMoveException;
 import logic.Board;

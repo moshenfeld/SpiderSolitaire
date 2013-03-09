@@ -11,7 +11,7 @@ import exceptions.IllegalMoveException;
 
 public class Board  implements Cloneable{
 
-	public static final int numOfPiles = 8;
+	public static final int numOfPiles = 5;
 	public static final int numOfRounds = 2;
 	public static final int numOfDecks = 4;
 	private CardsPile[] cardPiles;

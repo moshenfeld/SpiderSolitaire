@@ -1,5 +1,6 @@
-package player;
+package player.factories;
 
+import player.abstructPlayers.EvaluationAIPlayer;
 import heuristics.AttributeWeigths;
 import logic.Board;
 import exceptions.IllegalMoveException;

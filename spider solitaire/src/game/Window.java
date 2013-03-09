@@ -1,8 +1,10 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -17,12 +19,14 @@ public class Window extends JFrame {
 	private Image dbImage;
     private Graphics dbg;
 	
-	public Window(Board board, int width, int height){
+	public Window(Board board){
 		super("Spider Solitaire");
 		this.board = board;
 		
-		this.setSize(width, height);
-	//	this.setUndecorated(true);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		System.out.println(screen.height);
+		this.setSize(screen.width, screen.height);
+//		this.setUndecorated(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -35,7 +39,7 @@ public class Window extends JFrame {
         dbImage = createImage(getWidth(), getHeight());
         dbg = dbImage.getGraphics();
         paintComponent(dbg);
-        g.drawImage(dbImage, 0, 20, this);
+        g.drawImage(dbImage, 0, 0, this);
     }
     
     public void paintComponent(Graphics g){

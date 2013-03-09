@@ -1,10 +1,12 @@
-package player;
+package player.players;
 
 import heuristics.Evaluator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import player.abstructPlayers.EvaluationAIPlayer;
 
 import logic.Board;
 import logic.Card;
@@ -77,11 +79,11 @@ public class DeepAIPlayer  extends EvaluationAIPlayer{
 			if(tempBoard.isGameOver())
 			{
 				System.out.println("out");
-				return new ScoreAndMove((evaluator.getValue(tempBoard) * (depth+2)),null);			
+				return new ScoreAndMove((evaluator.evaluate(tempBoard) * (depth+2)),null);			
 			}
 			if(depth < 0)
 			{
-				return new ScoreAndMove(evaluator.getValue(tempBoard),null);
+				return new ScoreAndMove(evaluator.evaluate(tempBoard),null);
 			}
 			List<Move> legalMoves = tempBoard.getLegalMoves();
 			ScoreAndMove tempScoreAndMove, bestScoreAndMove = new ScoreAndMove(Double.NEGATIVE_INFINITY,null);
@@ -95,7 +97,7 @@ public class DeepAIPlayer  extends EvaluationAIPlayer{
 				}
 				tempBoard.move(move, false);
 				tempScoreAndMove = getNextDeepMove(depth);
-				tempScoreAndMove.score +=evaluator.getValue(tempBoard);	
+				tempScoreAndMove.score +=evaluator.evaluate(tempBoard);	
 				tempBoard.move(undoMove, false);
 				tempBoard.fakeMoveResetData(2);
 

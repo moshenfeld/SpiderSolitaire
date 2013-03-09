@@ -4,7 +4,8 @@ import game.ApproximationGameManager;
 import heuristics.StateAttributes;
 import java.util.HashMap;
 import java.util.Map;
-import player.ApproximationAIFactory;
+
+import player.factories.ApproximationAIFactory;
 
 public class QLearner {
 

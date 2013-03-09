@@ -3,8 +3,8 @@ package game;
 import heuristics.AttributeWeigths;
 import logic.Board;
 import logic.Move;
-import player.EvaluationAIFactory;
-import player.EvaluationAIPlayer;
+import player.abstructPlayers.EvaluationAIPlayer;
+import player.factories.EvaluationAIFactory;
 
 public class EvaluatorGameManager {
 	

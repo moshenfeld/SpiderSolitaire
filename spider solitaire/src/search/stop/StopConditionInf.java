@@ -1,4 +1,6 @@
-package search;
+package search.stop;
+
+import search.Node;
 
 
 public interface StopConditionInf {

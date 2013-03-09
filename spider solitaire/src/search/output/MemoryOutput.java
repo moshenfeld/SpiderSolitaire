@@ -1,8 +1,10 @@
-package search;
+package search.output;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import search.Node;
 
 import logger.Log;
 import logic.Move;

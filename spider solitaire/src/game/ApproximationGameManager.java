@@ -10,8 +10,8 @@ import heuristics.RewardCalculator;
 import heuristics.StateAttributes;
 import logic.Board;
 import logic.Move;
-import player.ApproximationAIPlayer;
-import player.ApproximationAIFactory;
+import player.factories.ApproximationAIFactory;
+import player.players.ApproximationAIPlayer;
 
 public class ApproximationGameManager {
 	public static final int maxNumOfMoves = 1000;
@@ -42,13 +42,13 @@ public class ApproximationGameManager {
 	
 	private void updateApproximation(ApproximationAIPlayer player, Board board, Map<StateAttributes, Double> approximations, double gamma,
 									double alpha) throws IllegalMoveException{
-		StateAttributes oldAttributes = StateAttributes.calculateState(player.getBoard()), newAttributes;
+		StateAttributes oldAttributes = StateAttributes.basicStateCalculation(player.getBoard()), newAttributes;
 		double reward = RewardCalculator.getReward(board), oldValue = 0, newValue = 0;
 		if(approximations.containsKey(oldAttributes)){
 			oldValue = approximations.get(oldAttributes);
 		}
 		player.getNextMove(board.getLegalMoves());
-		newAttributes = StateAttributes.calculateState(player.getBoard());
+		newAttributes = StateAttributes.basicStateCalculation(player.getBoard());
 		if(approximations.containsKey(newAttributes)){
 			newValue = approximations.get(newAttributes);
 		}

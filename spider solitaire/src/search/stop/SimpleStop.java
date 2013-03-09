@@ -1,15 +1,16 @@
-package search;
+package search.stop;
 
+import search.Node;
 import logic.Board;
 
 public class SimpleStop implements StopConditionInf {
-	
 	private int depth;
 	
-
+	
 	public SimpleStop(int depth) {
 		this.depth = depth;
 	}
+
 
 	@Override
 	public boolean isStop(Node node) {
@@ -18,7 +19,7 @@ public class SimpleStop implements StopConditionInf {
 			return true;
 		}
 		
-		if(node.getMoves().size() == depth)
+		if(node.getMoves().size() == this.depth)
 		{
 			return true;
 		}

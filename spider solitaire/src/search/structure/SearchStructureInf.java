@@ -1,4 +1,6 @@
-package search;
+package search.structure;
+
+import search.Node;
 
 public interface SearchStructureInf {
 	

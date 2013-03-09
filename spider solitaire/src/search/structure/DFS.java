@@ -1,6 +1,8 @@
-package search;
+package search.structure;
 
 import java.util.Stack;
+
+import search.Node;
 
 
 

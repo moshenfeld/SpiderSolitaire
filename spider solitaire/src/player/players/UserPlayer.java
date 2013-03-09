@@ -1,9 +1,11 @@
-package player;
+package player.players;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+
+import player.abstructPlayers.Player;
 
 import logic.Board;
 import logic.Card;

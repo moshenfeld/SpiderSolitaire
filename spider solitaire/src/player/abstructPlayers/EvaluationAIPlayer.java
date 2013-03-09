@@ -1,7 +1,8 @@
-package player;
+package player.abstructPlayers;
 
 import heuristics.AttributeWeigths;
 import heuristics.Evaluator;
+import heuristics.WeightsEvaluator;
 import logic.Board;
 
 public abstract class EvaluationAIPlayer extends AIPlayer {
@@ -13,7 +14,7 @@ public abstract class EvaluationAIPlayer extends AIPlayer {
 	}
 	
 	public void setWeights(AttributeWeigths weights){
-		this.evaluator = new Evaluator(weights);		
+		this.evaluator = new WeightsEvaluator(weights);		
 	}
 	
 	

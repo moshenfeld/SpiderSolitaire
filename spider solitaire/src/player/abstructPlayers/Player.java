@@ -1,4 +1,4 @@
-package player;
+package player.abstructPlayers;
 
 import java.util.List;
 
@@ -12,6 +12,10 @@ public abstract class Player {
 	protected Board board;
 
 	public Player(Board board) {
+		this.board = board.clone();
+	}
+	
+	public void setBoard(Board board) {
 		this.board = board.clone();
 	}
 	
